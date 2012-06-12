@@ -26,7 +26,7 @@ public class DinamicArray {
 
 	public void add(int num, int index) {
 		if (index > lastIndex || index < 0) {
-			System.out.println("çà ïðåäåëàìè ìàññèâà");
+			System.out.println("Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ð°Ð¼Ð¸ Ð¼Ð°ÑÑÐ¸Ð²Ð°");
 			return;
 		}
 		if (lastIndex == capacity - 1) {
@@ -45,7 +45,7 @@ public class DinamicArray {
 
 	public int get(int index) {
 		if (index > lastIndex || index < 0) {
-			System.out.println("íåò òàêîãî ýëåìåíòà");
+			System.out.println("Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ð°Ð¼Ð¸ Ð¼Ð°ÑÑÐ¸Ð²Ð°");
 			return 0;
 		}
 		return a[index];
@@ -53,7 +53,7 @@ public class DinamicArray {
 
 	public void del(int index) {
 		if (index > lastIndex || index < 0) {
-			System.out.println("çà ïðåäåëàìè ìàññèâà");
+			System.out.println("Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ð°Ð¼Ð¸ Ð¼Ð°ÑÑÐ¸Ð²Ð°");
 			return;
 		}
 		for (int i = index; i < lastIndex; i++) {
