@@ -32,7 +32,7 @@ public class DinamicArray {
 		if (lastIndex == capacity - 1) {
 			increase();
 		}
-		for (int i = lastIndex + 1; i > index; i--) {
+		for (int i = lastIndex; i > index; i--) {
 			a[i + 1] = a[i];
 		}
 		a[index] = num;

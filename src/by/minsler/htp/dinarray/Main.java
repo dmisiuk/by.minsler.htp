@@ -4,7 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		DinamicArray da = new DinamicArray();
+		DinamicArray da = new DinamicArray(14);
 		da.add(10);
 		da.add(11);
 		System.out.println(da);
@@ -17,7 +17,7 @@ public class Main {
 
 		da.add(200);
 		System.out.println(da);
-		da.add(-5, 0);
+		da.add(-5, 1);
 		System.out.println(da);
 		da.del(5);
 		System.out.println(da);
