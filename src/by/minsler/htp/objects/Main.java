@@ -24,27 +24,25 @@ public class Main {
 
 		System.out.println(time);
 
-		// NewTime a[] = new NewTime[10];
-		//
-		// for (int i = 0; i < a.length; i++) {
-		// int bb =(int) (Math.random() * 10000000);
+		NewTime a[] = new NewTime[10];
 
-		// a[i] = new NewTime(b);
-		// }
-		//
-		// NewTime max = a[0];
-		//
-		// for (int i = 1; i < a.length; i++) {
-		// if (a[i].compareTo(max) > 0) {
-		// max = a[i];
-		// }
-		// }
-		//
-		// for (int i = 0; i < a.length; i++) {
-		// System.out.println(a[i]);
-		// }
-		//
-		// System.out.println("max = " + max);
-		// }
+		for (int i = 0; i < a.length; i++) {
+			int bb = (int) (Math.random() * 10000000);
+			a[i] = new NewTime(bb);
+		}
+
+		NewTime max = a[0];
+
+		for (int i = 1; i < a.length; i++) {
+			if (a[i].compareTo(max) > 0) {
+				max = a[i];
+			}
+		}
+
+		for (int i = 0; i < a.length; i++) {
+			System.out.println(a[i]);
+		}
+
+		System.out.println("max = " + max);
 	}
 }

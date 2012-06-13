@@ -31,23 +31,15 @@ public class NewTime {
 		return (s + 60 * (m + 60 * h));
 	}
 
-	public int compareTo(NewTime param) {
-		if (this.h > param.h) {
-			return 1;
-		} else if (this.h < param.h) {
-			return -1;
+	public long compareTo(NewTime param) {
+		if (this.h != param.h) {
+			return (this.h - param.h);
 		}
-
-		if (this.m > param.m) {
-			return 1;
-		} else if (this.m < param.m) {
-			return -1;
+		if (this.m != param.m) {
+			return (this.h - param.h);
 		}
-
-		if (this.s > param.s) {
-			return 1;
-		} else if (this.s < param.s) {
-			return -1;
+		if (this.s != param.s) {
+			return (this.h - param.h);
 		}
 		return 0;
 	}
