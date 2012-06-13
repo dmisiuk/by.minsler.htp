@@ -36,10 +36,10 @@ public class NewTime {
 			return (this.h - param.h);
 		}
 		if (this.m != param.m) {
-			return (this.h - param.h);
+			return (this.m - param.m);
 		}
 		if (this.s != param.s) {
-			return (this.h - param.h);
+			return (this.s - param.s);
 		}
 		return 0;
 	}
