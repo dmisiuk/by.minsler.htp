@@ -25,8 +25,10 @@ public class PatternCounter {
 
 	public Map<String, Integer> count(BufferedReader br, Pattern pattern)
 			throws IOException {
-		String line = br.readLine();
-		this.count(line, pattern);
+		String l;
+		while ((l = br.readLine()) != null) {
+			this.count(l, pattern);
+		}
 		return elements;
 	}
 
