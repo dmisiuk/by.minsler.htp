@@ -63,8 +63,8 @@ public class TestPatternCounter {
 
 			} catch (FileNotFoundException e) {
 				System.out.println(fileName + " not found");
-			} catch (Exception e) {
-				// TODO: handle exception
+			} catch (IOException e) {
+				e.printStackTrace();
 			} finally {
 				if (in != null) {
 					try {
