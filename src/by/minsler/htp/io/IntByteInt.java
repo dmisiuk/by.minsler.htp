@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -60,6 +61,8 @@ public class IntByteInt {
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("file" + fileName + " not found");
+		} catch (EOFException e) {
+			System.out.println("end of file is reached");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
