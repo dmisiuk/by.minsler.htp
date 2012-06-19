@@ -2,12 +2,12 @@ package by.minsler.htp.categories;
 
 import by.minsler.htp.card.Card;
 
-public class Visa extends Card {
+public abstract class Visa extends Card {
 
 	protected boolean internetBank;
 
-	public Visa(int startSum, String endDate, String type) {
-		super("Visa", startSum, endDate, type);
+	public Visa(int startSum, String endDate, String type, int pin) {
+		super("Visa", startSum, endDate, type, pin);
 	}
 
 	@Override

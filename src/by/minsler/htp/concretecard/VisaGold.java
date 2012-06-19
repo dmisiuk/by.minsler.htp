@@ -4,8 +4,8 @@ import by.minsler.htp.categories.Visa;
 
 public class VisaGold extends Visa {
 
-	public VisaGold(int startSum, String endDate, String type) {
-		super(startSum, endDate, type);
+	public VisaGold(int startSum, String endDate, String type, int pin) {
+		super(startSum, endDate, type, pin);
 		this.internetBank = true;
 	}
 
@@ -19,5 +19,10 @@ public class VisaGold extends Visa {
 			System.out.println(" ошибка");
 		}
 		return result;
+	}
+
+	@Override
+	public String getDescription() {
+		return "Super-Puper card from Visa with all";
 	}
 }

@@ -4,8 +4,8 @@ import by.minsler.htp.categories.Visa;
 
 public class VisaElectron extends Visa {
 
-	public VisaElectron(int startSum, String endDate, String type) {
-		super(startSum, endDate, type);
+	public VisaElectron(int startSum, String endDate, String type, int pin) {
+		super(startSum, endDate, type, pin);
 		this.internetBank = false;
 	}
 
@@ -20,4 +20,10 @@ public class VisaElectron extends Visa {
 		}
 		return result;
 	}
+
+	@Override
+	public String getDescription() {
+		return "Ordinary Visa Electron card without internet-banking";
+	}
+
 }
