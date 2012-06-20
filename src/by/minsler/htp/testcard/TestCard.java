@@ -1,4 +1,4 @@
-package by.minsler.htp.testCard;
+package by.minsler.htp.testcard;
 
 import by.minsler.htp.card.Card;
 import by.minsler.htp.concretecard.MaestroClassic;
