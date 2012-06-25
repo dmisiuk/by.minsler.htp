@@ -8,6 +8,7 @@ import java.util.Set;
 public class Test {
 
 	public static void main(String[] args) {
+		Object m = new Object();
 
 		List<Integer> numbers = new ArrayList<Integer>();
 		List<Integer> evenNummbers = new ArrayList<Integer>();
@@ -41,5 +42,6 @@ public class Test {
 		System.out.println("Unique numbers: " + uniqies);
 		System.out.println("Duplicate numbers: " + dups);
 		System.out.println("Numbers without duplicate: " + superUniqies);
+
 	}
 }
