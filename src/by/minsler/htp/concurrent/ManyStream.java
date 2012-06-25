@@ -1,4 +1,4 @@
-package by.minsler.ht.p.concurrent;
+package by.minsler.htp.concurrent;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
