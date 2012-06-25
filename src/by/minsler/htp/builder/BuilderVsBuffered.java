@@ -10,7 +10,7 @@ public class BuilderVsBuffered {
 		StringBuffer sBufferd = new StringBuffer();
 		testTime(sBuilder, 1000000);
 		testTime(sBufferd, 1000000);
-		testTime("", 10000);
+		testTime("", 100000);
 	}
 
 	public static void testTime(Appendable string, int times)
