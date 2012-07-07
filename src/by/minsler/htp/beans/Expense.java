@@ -1,16 +1,19 @@
 package by.minsler.htp.beans;
 
+import java.sql.Date;
+
 public class Expense {
 
 	private int num;
-	private String paydate;
+	private Date paydate;
 	private int receiver;
 	private int value;
 
 	public Expense() {
 	}
 
-	public Expense(int num, String paydate, int receiver, int value) {
+	public Expense(int num, Date paydate, int receiver, int value) {
+		this.num = num;
 		this.receiver = receiver;
 		this.paydate = paydate;
 		this.value = value;
@@ -24,11 +27,11 @@ public class Expense {
 		this.num = num;
 	}
 
-	public String getPaydate() {
+	public Date getPaydate() {
 		return paydate;
 	}
 
-	public void setPaydate(String paydate) {
+	public void setPaydate(Date paydate) {
 		this.paydate = paydate;
 	}
 
