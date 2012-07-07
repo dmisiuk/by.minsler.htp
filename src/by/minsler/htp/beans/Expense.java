@@ -6,10 +6,16 @@ public class Expense {
 	private int num;
 	private String paydate;
 	private int receiver;
+	private int value;
 
-	public Expense(String paydate, int receiver) {
+	public Expense() {
+		num = nextId++;
+	}
+
+	public Expense(String paydate, int receiver, int value) {
 		this.receiver = receiver;
 		this.paydate = paydate;
+		this.value = value;
 		num = nextId++;
 	}
 
@@ -27,6 +33,14 @@ public class Expense {
 
 	public void setReceiver(int receiver) {
 		this.receiver = receiver;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
 	}
 
 	public int getNum() {

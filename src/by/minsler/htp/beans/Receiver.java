@@ -6,6 +6,10 @@ public class Receiver {
 	private int num;
 	private String name;
 
+	public Receiver() {
+		num = nextId++;
+	}
+
 	public Receiver(String name) {
 		this.name = name;
 		num = nextId++;
