@@ -1,4 +1,4 @@
-package by.minsler.htp.dao.plsql;
+package by.minsler.htp.dao.sql;
 
 
 public abstract class PostgresDAO {

@@ -1,4 +1,4 @@
-package by.minsler.htp.dao.plsql;
+package by.minsler.htp.dao.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import by.minsler.htp.beans.Expense;
 import by.minsler.htp.dao.ExpenseDAO;
-import by.minsler.htp.dao.plsql.MysqlExpenseDAO;
+import by.minsler.htp.dao.sql.MysqlExpenseDAO;
 
 public class MysqlTest {
 	public static void main(String[] args) throws SQLException {

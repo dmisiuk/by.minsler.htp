@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import by.minsler.htp.beans.Expense;
 import by.minsler.htp.dao.ExpenseDAO;
-import by.minsler.htp.dao.plsql.PostgresExpenseDAO;
+import by.minsler.htp.dao.sql.PostgresExpenseDAO;
 
 public class TestDAO {
 	public static void main(String[] args) {
