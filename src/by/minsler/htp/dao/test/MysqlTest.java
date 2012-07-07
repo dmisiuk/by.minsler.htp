@@ -1,4 +1,4 @@
-package by.minsler.htp.db;
+package by.minsler.htp.dao.test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
