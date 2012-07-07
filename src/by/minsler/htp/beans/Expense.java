@@ -2,21 +2,26 @@ package by.minsler.htp.beans;
 
 public class Expense {
 
-	private static int nextId = 0;
 	private int num;
 	private String paydate;
 	private int receiver;
 	private int value;
 
 	public Expense() {
-		num = nextId++;
 	}
 
-	public Expense(String paydate, int receiver, int value) {
+	public Expense(int num, String paydate, int receiver, int value) {
 		this.receiver = receiver;
 		this.paydate = paydate;
 		this.value = value;
-		num = nextId++;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public String getPaydate() {
@@ -43,8 +48,11 @@ public class Expense {
 		this.value = value;
 	}
 
-	public int getNum() {
-		return num;
+	@Override
+	public String toString() {
+		return "num: " + this.getNum() + ", paydate: " + this.getPaydate()
+				+ ", receiver: " + this.getReceiver() + ", value: "
+				+ this.getValue();
 	}
 
 }

@@ -1,4 +1,4 @@
-package by.minsler.dao;
+package by.minsler.htp.dao;
 
 import java.util.ArrayList;
 
