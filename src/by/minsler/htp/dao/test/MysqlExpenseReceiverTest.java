@@ -11,6 +11,7 @@ public class MysqlExpenseReceiverTest {
 		ExpenseReceiverDAO erdao = MysqlExpenseReceiverDAO.getInstance();
 
 		ArrayList<Expense> list = erdao.getExpenses();
+		System.out.println("list expenses in table");
 		for (Expense expense : list) {
 			System.out.println(expense);
 		}
