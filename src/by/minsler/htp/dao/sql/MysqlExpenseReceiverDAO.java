@@ -13,7 +13,7 @@ import by.minsler.htp.dao.ExpenseReceiverDAO;
 
 public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 
-	private static MysqlExpenseDAO inst;
+	private static MysqlExpenseReceiverDAO inst;
 	private static Connection connection;
 
 	private static String userName = "root";
@@ -25,9 +25,9 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 		createConnection();
 	}
 
-	synchronized public static MysqlExpenseDAO getInstance() {
+	synchronized public static MysqlExpenseReceiverDAO getInstance() {
 		if (inst == null) {
-			inst = new MysqlExpenseDAO();
+			inst = new MysqlExpenseReceiverDAO();
 		}
 		return inst;
 	}
