@@ -1,4 +1,4 @@
-package by.minsler.htp.db;
+package by.minsler.htp.beans;
 
 public class Expense {
 
