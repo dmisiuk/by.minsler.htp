@@ -29,4 +29,9 @@ public class Receiver {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "num: " + this.getNum() + ", name: " + this.getName();
+	}
+
 }
