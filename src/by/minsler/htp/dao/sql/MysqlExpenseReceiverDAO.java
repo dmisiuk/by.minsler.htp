@@ -17,19 +17,43 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	private static MysqlExpenseReceiverDAO inst;
 	private static Connection connection;
 	// MySQL
-	// private static String userName = "root";
-	// private static String password = "1234";
-	// private static String jdbcDriverName = "com.mysql.jdbc.Driver";
-	// private static String url = "jdbc:mysql://localhost:3306/minslertest";
+	private static String userName = "root";
+	private static String password = "1234";
+	private static String jdbcDriverName = "com.mysql.jdbc.Driver";
+	private static String url = "jdbc:mysql://localhost:3306/minslertest";
 
 	// PostgreSQL
-	private static String userName = "testuser";
-	private static String password = "1234";
-	private static String jdbcDriverName = "org.postgresql.Driver";
-	private static String url = "jdbc:postgresql://localhost:5432/listexpenses";
+	// private static String userName = "testuser";
+	// private static String password = "1234";
+	// private static String jdbcDriverName = "org.postgresql.Driver";
+	// private static String url =
+	// "jdbc:postgresql://localhost:5432/listexpenses";
+
+	public static final String selectAllExpenses = "select * from expenses";
+	public static final String selectByNumExpense = "select * from expenses where num = ?";
+	public static final String insertExpense = "insert into expenses(num, paydate, receiver, value) values(?,?,?,?)";
+	public static final String deleteByNumExpense = "delete from expenses where num=?";
+	public static final String updateByNumExpense = "update expenses set paydate=?, receiver=?, value=? where num=?";
+	public static final String selectAllReceivers = "select * from receivers";
+	public static final String selectByNumReceiver = "select * from receivers where num = ?";
+	public static final String insertReceiver = "insert into receivers(num, name) values(?,?)";
+	public static final String deleteByNumReceiver = "delete from receivers where num=?";
+	public static final String updateByNumReceiver = "update receivers set name=? where num=?";
+
+	private static Statement selectAllExpensesStatement = null;
+	private static PreparedStatement selectByNumExpenseStatement = null;
+	private static PreparedStatement insertExpenseStatement = null;
+	private static PreparedStatement deleteByNumExpenseStatement = null;
+	private static PreparedStatement updateByNumExpenseStatement = null;
+	private static Statement selectAllReceiverStatement = null;
+	private static PreparedStatement selectByNumReceiverStatement = null;
+	private static PreparedStatement insertReceiverStatement = null;
+	private static PreparedStatement deleteByNumReceiverStatement = null;
+	private static PreparedStatement updateByNumReceiverStatement = null;
 
 	private MysqlExpenseReceiverDAO() {
 		createConnection();
+		createStatements();
 	}
 
 	synchronized public static MysqlExpenseReceiverDAO getInstance() {
@@ -50,6 +74,32 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 		}
 	}
 
+	private void createStatements() {
+		try {
+			selectAllExpensesStatement = connection.createStatement();
+			selectByNumExpenseStatement = connection
+					.prepareStatement(selectByNumExpense);
+			insertExpenseStatement = connection.prepareStatement(insertExpense);
+			deleteByNumExpenseStatement = connection
+					.prepareStatement(deleteByNumExpense);
+			updateByNumExpenseStatement = connection
+					.prepareStatement(updateByNumExpense);
+			selectAllReceiverStatement = connection.createStatement();
+			selectByNumReceiverStatement = connection
+					.prepareStatement(selectByNumReceiver);
+			insertReceiverStatement = connection
+					.prepareStatement(insertReceiver);
+			deleteByNumReceiverStatement = connection
+					.prepareStatement(deleteByNumReceiver);
+			updateByNumReceiverStatement = connection
+					.prepareStatement(updateByNumReceiver);
+
+		} catch (SQLException e) {
+			System.out.println("sql exception on create statements"
+					+ e.getMessage());
+		}
+	}
+
 	private void closeConnection() {
 		if (connection != null) {
 			System.out.print("close connection: ");
@@ -65,10 +115,9 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public ArrayList<Expense> getExpenses() {
 		ArrayList<Expense> list = new ArrayList<Expense>();
-		String selectAll = "select * from expenses";
 		try {
-			Statement selectAllStatement = connection.createStatement();
-			ResultSet result = selectAllStatement.executeQuery(selectAll);
+			ResultSet result = selectAllExpensesStatement
+					.executeQuery(selectAllExpenses);
 			while (result.next()) {
 				Expense expense = new Expense();
 				expense.setNum(result.getInt("num"));
@@ -88,19 +137,16 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public Expense getExpense(int num) {
 		Expense expense = null;
-		String selectByNum = "select * from expenses where num = ?";
 		try {
-			PreparedStatement selectByNumStatement = connection
-					.prepareStatement(selectByNum);
-			selectByNumStatement.setInt(1, num);
-			ResultSet result = selectByNumStatement.executeQuery();
+			selectByNumExpenseStatement.clearParameters();
+			selectByNumExpenseStatement.setInt(1, num);
+			ResultSet result = selectByNumExpenseStatement.executeQuery();
 			if (result.next()) {
 				expense = new Expense();
 				expense.setNum(result.getInt("num"));
 				expense.setPaydate(result.getDate("paydate"));
 				expense.setReceiver(result.getInt("receiver"));
 				expense.setValue(result.getInt("value"));
-
 			}
 		} catch (SQLException e) {
 			System.out.println("sql exception" + e.getMessage());
@@ -111,15 +157,13 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public int addExpense(Expense expense) {
 		int result = 0;
-		String insert = "insert into expenses(num, paydate, receiver, value) values(?,?,?,?)";
 		try {
-			PreparedStatement insertStatement = connection
-					.prepareStatement(insert);
-			insertStatement.setInt(1, expense.getNum());
-			insertStatement.setDate(2, expense.getPaydate());
-			insertStatement.setInt(3, expense.getReceiver());
-			insertStatement.setInt(4, expense.getValue());
-			result = insertStatement.executeUpdate();
+			insertExpenseStatement.clearParameters();
+			insertExpenseStatement.setInt(1, expense.getNum());
+			insertExpenseStatement.setDate(2, expense.getPaydate());
+			insertExpenseStatement.setInt(3, expense.getReceiver());
+			insertExpenseStatement.setInt(4, expense.getValue());
+			result = insertExpenseStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql exception" + e.getMessage());
 		}
@@ -129,12 +173,9 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public int delExpense(int num) {
 		int result = 0;
-		String deleteByNum = "delete from expenses where num=?";
 		try {
-			PreparedStatement deleteByNumStatement = connection
-					.prepareStatement(deleteByNum);
-			deleteByNumStatement.setInt(1, num);
-			result = deleteByNumStatement.executeUpdate();
+			deleteByNumExpenseStatement.setInt(1, num);
+			result = deleteByNumExpenseStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql exception" + e.getMessage());
 		}
@@ -144,15 +185,13 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public int updateExpense(int num, Expense expense) {
 		int result = 0;
-		String updateByNum = "update expenses set paydate=?, receiver=?, value=? where num=?";
+
 		try {
-			PreparedStatement updateByNumStatement = connection
-					.prepareStatement(updateByNum);
-			updateByNumStatement.setInt(4, num);
-			updateByNumStatement.setDate(1, expense.getPaydate());
-			updateByNumStatement.setInt(2, expense.getReceiver());
-			updateByNumStatement.setInt(3, expense.getValue());
-			result = updateByNumStatement.executeUpdate();
+			updateByNumExpenseStatement.setInt(4, num);
+			updateByNumExpenseStatement.setDate(1, expense.getPaydate());
+			updateByNumExpenseStatement.setInt(2, expense.getReceiver());
+			updateByNumExpenseStatement.setInt(3, expense.getValue());
+			result = updateByNumExpenseStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql exception" + e.getMessage());
 		}
@@ -162,10 +201,9 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public ArrayList<Receiver> getReceivers() {
 		ArrayList<Receiver> list = new ArrayList<Receiver>();
-		String selectAll = "select * from receivers";
 		try {
-			Statement selectAllStatement = connection.createStatement();
-			ResultSet result = selectAllStatement.executeQuery(selectAll);
+			ResultSet result = selectAllReceiverStatement
+					.executeQuery(selectAllReceivers);
 			while (result.next()) {
 				Receiver receiver = new Receiver();
 				receiver.setNum(result.getInt("num"));
@@ -182,12 +220,11 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public Receiver getReceiver(int num) {
 		Receiver receiver = null;
-		String selectByNum = "select * from receivers where num = ?";
+
 		try {
-			PreparedStatement selectByNumStatement = connection
-					.prepareStatement(selectByNum);
-			selectByNumStatement.setInt(1, num);
-			ResultSet result = selectByNumStatement.executeQuery();
+
+			selectByNumReceiverStatement.setInt(1, num);
+			ResultSet result = selectByNumReceiverStatement.executeQuery();
 			if (result.next()) {
 				receiver = new Receiver();
 				receiver.setNum(result.getInt("num"));
@@ -202,13 +239,10 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public int addReceiver(Receiver receiver) {
 		int result = 0;
-		String insert = "insert into receivers(num, name) values(?,?)";
 		try {
-			PreparedStatement insertStatement = connection
-					.prepareStatement(insert);
-			insertStatement.setInt(1, receiver.getNum());
-			insertStatement.setString(2, receiver.getName());
-			result = insertStatement.executeUpdate();
+			insertReceiverStatement.setInt(1, receiver.getNum());
+			insertReceiverStatement.setString(2, receiver.getName());
+			result = insertReceiverStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql exception" + e.getMessage());
 		}
@@ -218,12 +252,9 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public int delReceiver(int num) {
 		int result = 0;
-		String deleteByNum = "delete from receivers where num=?";
 		try {
-			PreparedStatement deleteByNumStatement = connection
-					.prepareStatement(deleteByNum);
-			deleteByNumStatement.setInt(1, num);
-			result = deleteByNumStatement.executeUpdate();
+			deleteByNumReceiverStatement.setInt(1, num);
+			result = deleteByNumReceiverStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql exception" + e.getMessage());
 		}
@@ -233,13 +264,10 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	@Override
 	public int updateReceiver(int num, Receiver receiver) {
 		int result = 0;
-		String updateByNum = "update receivers set name=? where num=?";
 		try {
-			PreparedStatement updateByNumStatement = connection
-					.prepareStatement(updateByNum);
-			updateByNumStatement.setInt(2, num);
-			updateByNumStatement.setString(1, receiver.getName());
-			result = updateByNumStatement.executeUpdate();
+			updateByNumReceiverStatement.setInt(2, num);
+			updateByNumReceiverStatement.setString(1, receiver.getName());
+			result = updateByNumReceiverStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql exception" + e.getMessage());
 		}
@@ -251,5 +279,4 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 		super.finalize();
 		closeConnection();
 	}
-
 }
