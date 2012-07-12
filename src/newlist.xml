@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pointlist SYSTEM "pl.dtd">
 <pointlist>
-<point unit="cm">
-<x></x>
-<y></y>
-</point>
+	<point unit="cm">
+		<x>34</x>
+		<y>34</y>
+	</point>
 </pointlist>

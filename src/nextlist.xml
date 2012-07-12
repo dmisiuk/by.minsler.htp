@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pointlist SYSTEM "pl.dtd">
+<pointlist>
+	<point unit="cm">
+		<x>23</x>
+		<y>18</y>
+	</point>
+	<point unit="px">
+		<x>2394</x>
+		<y>23121</y>
+	</point>
+
+</pointlist>
