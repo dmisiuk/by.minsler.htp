@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlconfig>
+	<url value="jdbc:myslq://localhost:3306/minslertest" />
+	<username value="root" />
+	<password value="1234" />
+</sqlconfig>
