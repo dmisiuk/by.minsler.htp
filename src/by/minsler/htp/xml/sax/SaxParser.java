@@ -1,6 +1,7 @@
 package by.minsler.htp.xml.sax;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -12,8 +13,13 @@ import by.minsler.htp.xml.SqlConfig;
 import by.minsler.htp.xml.sax.handler.SqlHandler;
 
 public class SaxParser {
+	private static HashMap<String, String> config;
 
-	public static void main(String[] args) {
+	private SaxParser() {
+
+	}
+
+	public static void init() {
 
 		SAXParserFactory saxFactory = SAXParserFactory.newInstance();
 		try {
@@ -30,6 +36,13 @@ public class SaxParser {
 			System.out.println("file not found");
 		}
 
-		System.out.println(SqlConfig.getInstance().getPrefereces());
+		config = SqlConfig.getPrefereces();
+	}
+
+	public static HashMap<String, String> getConfig() {
+		if (config == null) {
+			init();
+		}
+		return config;
 	}
 }

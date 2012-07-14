@@ -12,7 +12,7 @@ public class SqlHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
 		String value = attributes.getValue("value");
-		SqlConfig.getInstance().getPrefereces().put(qName, value);
+		SqlConfig.getPrefereces().put(qName, value);
 	}
 
 }

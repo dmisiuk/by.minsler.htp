@@ -22,9 +22,10 @@ public class AdderReceiverCommand implements Command {
 			String s[] = l.split(" ");
 			receiver = new Receiver();
 			receiver.setNum(Integer.parseInt(s[0]));
-			receiver.setName(s[2]);
+			receiver.setName(s[1]);
 			result = MysqlExpenseReceiverDAO.getInstance()
 					.addReceiver(receiver);
+			System.out.println(receiver);
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("неверное количество аргументов");
 		} catch (NumberFormatException e) {

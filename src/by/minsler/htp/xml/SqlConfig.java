@@ -8,18 +8,7 @@ public class SqlConfig {
 
 	private static final HashMap<String, String> preferences = new HashMap<String, String>();
 
-	private SqlConfig() {
-
-	}
-
-	synchronized public static SqlConfig getInstance() {
-		if (inst == null) {
-			inst = new SqlConfig();
-		}
-		return inst;
-	}
-
-	synchronized public HashMap<String, String> getPrefereces() {
+	public static HashMap<String, String> getPrefereces() {
 		return preferences;
 	}
 

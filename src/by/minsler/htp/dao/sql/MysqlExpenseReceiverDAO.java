@@ -7,20 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import by.minsler.htp.beans.Expense;
 import by.minsler.htp.beans.Receiver;
 import by.minsler.htp.dao.ExpenseReceiverDAO;
+import by.minsler.htp.xml.sax.SaxParser;
 
 public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 
 	private static MysqlExpenseReceiverDAO inst;
 	private static Connection connection;
 	// MySQL
-	private static String userName = "root";
-	private static String password = "1234";
-	private static String jdbcDriverName = "com.mysql.jdbc.Driver";
-	private static String url = "jdbc:mysql://localhost:3306/minslertest";
+	private static String userName;
+	private static String password;
+	private static String jdbcDriverName;
+	private static String url;
 
 	// PostgreSQL
 	// private static String userName = "testuser";
@@ -64,6 +66,11 @@ public class MysqlExpenseReceiverDAO implements ExpenseReceiverDAO {
 	}
 
 	private void createConnection() {
+		HashMap<String, String> config = SaxParser.getConfig();
+		url = config.get("url");
+		userName = config.get("userName");
+		password = config.get("password");
+		jdbcDriverName = config.get("driverName");
 		try {
 			Class.forName(jdbcDriverName);
 			connection = DriverManager.getConnection(url, userName, password);
