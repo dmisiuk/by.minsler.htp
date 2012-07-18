@@ -9,5 +9,13 @@
 		<x>2394</x>
 		<y>23121</y>
 	</point>
+	<point unit="mm">
+		<x>17</x>
+		<y>11</y>
+	</point>
+	<point unit="px">
+		<x>90</x>
+		<y>0</y>
+	</point>
 
 </pointlist>
